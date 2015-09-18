@@ -9,7 +9,7 @@ Example
 import React, {Component, PropTypes} from 'react';
 import {bindActionCreators} from 'redux';
 
-import connectContext from './connectContext';
+import connectContext from 'react-redux-connect-context';
 
 function click() {
   return {
