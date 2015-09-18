@@ -1,6 +1,6 @@
 {
   "name": "react-redux-connect-context",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Enhanced version of redux' connect that puts action creators in the child context",
   "main": "lib/index.js",
   "scripts": {
