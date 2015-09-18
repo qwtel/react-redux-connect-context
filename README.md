@@ -1,23 +1,44 @@
-Redux Switch Action
-===================
+React Redux Connect Context
+===========================
+Enhanced version of redux' connect, that puts all action creators into the child context of the component.
 
-Slightly more concise reducer switching for [Flux Standard Actions](https://github.com/acdlite/flux-standard-action).
+Example
+-------
 
 ```js
-const switchAction = createSwitchAction({
-  [ADD]: addReducer,
-  [SUB]: subReducer,
-});
+import React, {Component, PropTypes} from 'react';
+import {bindActionCreators} from 'redux';
 
-export function reducer(state = 0, action) {
-  return switchAction(state, action);
+import connectContext from './connectContext';
+
+function click() {
+  return {
+    type: 'CLICK',
+  }
 }
 
-function addReducer(state, payload) {
-  return state + payload.amount;
+function mapStateToProps(state) {
+  return state;
 }
 
-function subReducer(state, payload) {
-  return state - payload.amount;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({click}, dispatch);
+}
+
+@connectContext(mapStateToProps, mapDispatchToProps)
+class Parent extends Component {
+  render() {
+    return <Child />;
+  }
+}
+
+class Child extends Component {
+  contextTypes: {
+    click: PropTypes.func,
+  }
+
+  render() {
+    <button onClick={this.context.click}/>
+  }
 }
 ```
